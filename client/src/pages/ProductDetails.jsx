@@ -4,6 +4,8 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 
+import productsData from '../products';
+
 const ProductDetails = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
@@ -12,14 +14,12 @@ const ProductDetails = () => {
 
     useEffect(() => {
         const fetchProduct = async () => {
-            try {
-                const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products/${id}`);
-                setProduct(data);
+            // Mock API delay
+            setTimeout(() => {
+                const foundProduct = productsData.find(p => p._id === id);
+                setProduct(foundProduct);
                 setLoading(false);
-            } catch (error) {
-                console.error(error);
-                setLoading(false);
-            }
+            }, 500);
         };
         fetchProduct();
     }, [id]);

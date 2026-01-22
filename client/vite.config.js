@@ -9,5 +9,6 @@ export default defineConfig({
   },
   server: {
     allowedHosts: ['puny-months-dress.loca.lt']
-  }
+  },
+  base: '/Odoluxe/'
 })

@@ -5,6 +5,8 @@ import ProductCard from '../components/ProductCard';
 
 import { useLocation } from 'react-router-dom';
 
+import productsData from '../products';
+
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -12,11 +14,27 @@ const Shop = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
+            setLoading(true);
             try {
-                const search = location.search; // ?keyword=Watch
-                const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products${search}`);
-                setProducts(data);
-                setLoading(false);
+                // Mock API call simulation
+                setTimeout(() => {
+                    const searchParams = new URLSearchParams(location.search);
+                    const keyword = searchParams.get('keyword');
+
+                    let data = productsData;
+
+                    if (keyword) {
+                        const lowerKeyword = keyword.toLowerCase();
+                        data = data.filter(p =>
+                            p.name.toLowerCase().includes(lowerKeyword) ||
+                            p.description.toLowerCase().includes(lowerKeyword) ||
+                            p.category.toLowerCase().includes(lowerKeyword)
+                        );
+                    }
+
+                    setProducts(data);
+                    setLoading(false);
+                }, 500);
             } catch (error) {
                 console.error('Error fetching products:', error);
                 setLoading(false);

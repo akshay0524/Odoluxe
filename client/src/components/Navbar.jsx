@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiShoppingBag, FiMenu, FiSearch, FiX, FiChevronRight } from 'react-icons/fi';
 import { useCart } from '../context/CartContext';
-import axios from 'axios';
+import productsData from '../products';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -28,12 +28,11 @@ const Navbar = () => {
     useEffect(() => {
         const fetchSuggestions = async () => {
             if (keyword.length > 1) {
-                try {
-                    const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products?keyword=${keyword}`);
-                    setSuggestions(data.slice(0, 5)); // Limit to 5 suggestions
-                } catch (error) {
-                    console.error('Error fetching suggestions', error);
-                }
+                const lowerKeyword = keyword.toLowerCase();
+                const filtered = productsData.filter(p =>
+                    p.name.toLowerCase().includes(lowerKeyword)
+                );
+                setSuggestions(filtered.slice(0, 5));
             } else {
                 setSuggestions([]);
             }
