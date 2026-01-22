@@ -1,0 +1,167 @@
+const products = [
+    // --- Belts ---
+    {
+        name: 'Obsidian Leather Belt',
+        image: 'https://images.unsplash.com/photo-1624222247344-550fb60583dc?auto=format&fit=crop&w=800&q=80',
+        description: 'Handcrafted from premium Italian leather, featuring a matte black buckle.',
+        brand: 'ODOLUXE',
+        category: 'Belts',
+        price: 250.00,
+        countInStock: 10,
+        rating: 4.5,
+        numReviews: 12,
+    },
+    {
+        name: 'Apex Cognac Belt',
+        image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80', // Placeholder belt image
+        description: 'Rich cognac leather with a brushed gold buckle. The ultimate statement accessory.',
+        brand: 'ODOLUXE',
+        category: 'Belts',
+        price: 275.00,
+        countInStock: 15,
+        rating: 0,
+        numReviews: 0,
+    },
+    {
+        name: 'Suede Camel Belt',
+        image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80', // Placeholder
+        description: 'Soft, textured suede in a classic camel hue. Perfect for casual elegance.',
+        brand: 'ODOLUXE',
+        category: 'Belts',
+        price: 220.00,
+        countInStock: 8,
+        rating: 0,
+        numReviews: 0,
+    },
+
+    // --- Watches ---
+    {
+        name: 'Chronos Gold Watch',
+        image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=800&q=80',
+        description: '18k gold plated stainless steel, sapphire crystal glass, Swiss movement.',
+        brand: 'ODOLUXE',
+        category: 'Watches',
+        price: 1200.00,
+        countInStock: 3,
+        rating: 5,
+        numReviews: 2,
+    },
+    {
+        name: 'Stealth Diver Watch',
+        image: 'https://images.unsplash.com/photo-1539874754764-5a96559165b0?auto=format&fit=crop&w=800&q=80',
+        description: 'Water resistant up to 300m. Black ion-plated steel with luminescent markers.',
+        brand: 'ODOLUXE',
+        category: 'Watches',
+        price: 1450.00,
+        countInStock: 5,
+        rating: 0,
+        numReviews: 0,
+    },
+    {
+        name: 'Classic Rose Gold',
+        image: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=800&q=80',
+        description: 'Minimalist face with rose gold mesh strap. Elegant and timeless.',
+        brand: 'ODOLUXE',
+        category: 'Watches',
+        price: 980.00,
+        countInStock: 7,
+        rating: 0,
+        numReviews: 0,
+    },
+
+    // --- Wallets & Cardholders ---
+    {
+        name: 'Midnight Cardholder',
+        image: 'https://images.unsplash.com/photo-1627123424574-18bd08336d37?auto=format&fit=crop&w=800&q=80',
+        description: 'Minimalist design with RFID protection, crafted from full-grain leather.',
+        brand: 'ODOLUXE',
+        category: 'Cardholders',
+        price: 120.00,
+        countInStock: 20,
+        rating: 4.8,
+        numReviews: 8,
+    },
+    {
+        name: 'Executive Bifold Wallet',
+        image: 'https://images.unsplash.com/photo-1627123424574-18bd08336d37?auto=format&fit=crop&w=800&q=80', // Replace with wallet
+        description: 'Classic bifold design with ample storage for cards and cash. Finest calfskin.',
+        brand: 'ODOLUXE',
+        category: 'Wallets',
+        price: 180.00,
+        countInStock: 12,
+        rating: 0,
+        numReviews: 0,
+    },
+    {
+        name: 'Monogram Zip Wallet',
+        image: 'https://images.unsplash.com/photo-1565520468925-5b4cf0a84e42?auto=format&fit=crop&w=800&q=80', // Placeholder
+        description: 'Secure zip-around closure with signature ODOLUXE embossing.',
+        brand: 'ODOLUXE',
+        category: 'Wallets',
+        price: 210.00,
+        countInStock: 10,
+        rating: 0,
+        numReviews: 0,
+    },
+
+    // --- Bags (Laptop, Side, Luggage) ---
+    {
+        name: 'Voyager Weekender Bag',
+        image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80',
+        description: 'The perfect companion for short trips. Water-resistant canvas with leather accents.',
+        brand: 'ODOLUXE',
+        category: 'Luggage',
+        price: 850.00,
+        countInStock: 5,
+        rating: 5,
+        numReviews: 4,
+    },
+    {
+        name: 'Urban Messenger',
+        image: 'https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=800&q=80',
+        description: 'Sleek side bag for city life. Fits an iPad and essentials.',
+        brand: 'ODOLUXE',
+        category: 'Side Bags',
+        price: 320.00,
+        countInStock: 15,
+        rating: 0,
+        numReviews: 0,
+    },
+    {
+        name: 'Executive Laptop Briefcase',
+        image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80', // Placeholder
+        description: 'Structured briefcase fitting up to 16" laptops. Professional and durable.',
+        brand: 'ODOLUXE',
+        category: 'Laptop Bags',
+        price: 550.00,
+        countInStock: 8,
+        rating: 0,
+        numReviews: 0,
+    },
+
+    // --- Phone Cases ---
+    {
+        name: 'Leather iPhone 15 Pro Case',
+        image: 'https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=800&q=80', // Placeholder
+        description: 'Genuine leather case with MagSafe compatibility. Develops a patina over time.',
+        brand: 'ODOLUXE',
+        category: 'Phone Cases',
+        price: 85.00,
+        countInStock: 50,
+        rating: 0,
+        numReviews: 0,
+    },
+    {
+        name: 'Alcantara Phone Case',
+        image: 'https://images.unsplash.com/photo-1603351154351-5cf9972a9ce1?auto=format&fit=crop&w=800&q=80', // Placeholder
+        description: 'Premium alcantara finish for superior grip and luxury feel.',
+        brand: 'ODOLUXE',
+        category: 'Phone Cases',
+        price: 95.00,
+        countInStock: 40,
+        rating: 0,
+        numReviews: 0,
+    },
+];
+
+module.exports = products;
