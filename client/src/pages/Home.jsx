@@ -22,24 +22,29 @@ const Home = () => {
     const rotateY = useTransform(mouseX, [-0.5, 0.5], [-15, 15]); // Tilt left/right
 
     useEffect(() => {
+        let frameId;
         const handleMouseMove = (e) => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            // Normalize to -0.5 to 0.5
-            x.set((e.clientX / width) - 0.5);
-            y.set((e.clientY / height) - 0.5);
+            frameId = requestAnimationFrame(() => {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                x.set((e.clientX / width) - 0.5);
+                y.set((e.clientY / height) - 0.5);
+            });
         };
         window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            cancelAnimationFrame(frameId);
+        };
     }, [x, y]);
 
     // Images for GSAP scroll animation
     const scrollImages = [
-        '/images/scroll/bag-laptop.jpg',
-        '/images/scroll/phone-case.jpg',
-        '/images/scroll/wallet-black.jpg',
-        '/images/scroll/wallet-collection.jpg',
-        '/images/scroll/bag-side.jpg'
+        `${import.meta.env.BASE_URL}images/scroll/bag-laptop.jpg`,
+        `${import.meta.env.BASE_URL}images/scroll/phone-case.jpg`,
+        `${import.meta.env.BASE_URL}images/scroll/wallet-black.jpg`,
+        `${import.meta.env.BASE_URL}images/scroll/wallet-collection.jpg`,
+        `${import.meta.env.BASE_URL}images/scroll/bag-side.jpg`
     ];
 
     // Cursor Logic
@@ -54,10 +59,13 @@ const Home = () => {
 
     useEffect(() => {
         const moveCursor = (e) => {
+            // Directly setting values without heavy React re-renders or spring calculations often helps, 
+            // but Framer Motion springs are usually performant. 
+            // Let's ensure this doesn't conflict with other listeners.
             cursorX.set(e.clientX);
             cursorY.set(e.clientY);
         };
-        window.addEventListener("mousemove", moveCursor);
+        window.addEventListener("mousemove", moveCursor, { passive: true });
         return () => window.removeEventListener("mousemove", moveCursor);
     }, []);
 
@@ -214,7 +222,8 @@ const Home = () => {
                             rotateY,
                             textShadow: '0 0 20px rgba(255,255,255,0.4), 0 0 60px rgba(212, 175, 55, 0.2)', // White + Gold Glow
                             cursor: 'default',
-                            transformStyle: 'preserve-3d'
+                            transformStyle: 'preserve-3d',
+                            willChange: 'transform, opacity'
                         }}
                     >
                         ODOLUXE
@@ -240,7 +249,8 @@ const Home = () => {
                     style={{
                         display: 'flex',
                         width: `${(scrollData.length + 1) * 100}vw`, // Dynamic width
-                        height: '100%'
+                        height: '100%',
+                        willChange: 'transform' // Hint to browser for smoother scrolling
                     }}
                 >
                     {scrollData.map((item, index) => (
