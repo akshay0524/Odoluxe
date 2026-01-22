@@ -14,7 +14,7 @@ const Shop = () => {
         const fetchProducts = async () => {
             try {
                 const search = location.search; // ?keyword=Watch
-                const { data } = await axios.get(`http://localhost:5000/api/products${search}`);
+                const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products${search}`);
                 setProducts(data);
                 setLoading(false);
             } catch (error) {

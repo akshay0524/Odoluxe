@@ -29,7 +29,7 @@ const Navbar = () => {
         const fetchSuggestions = async () => {
             if (keyword.length > 1) {
                 try {
-                    const { data } = await axios.get(`http://localhost:5000/api/products?keyword=${keyword}`);
+                    const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products?keyword=${keyword}`);
                     setSuggestions(data.slice(0, 5)); // Limit to 5 suggestions
                 } catch (error) {
                     console.error('Error fetching suggestions', error);
